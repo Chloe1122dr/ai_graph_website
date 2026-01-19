@@ -1,0 +1,79 @@
+
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Average AEI by O*NET Category</title>
+  <script src="https://cdn.plot.ly/plotly-2.30.0.min.js"></script>
+
+  <style>
+    body {
+      font-family: "Times New Roman", serif;
+      background: #f5f8ff;
+      margin: 30px;
+      color: #0b1f4d;
+    }
+    #chart {
+      background: white;
+      border-radius: 18px;
+      box-shadow: 0 10px 30px rgba(11,31,77,0.10);
+      padding: 12px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="chart"></div>
+
+<script>
+const data = [{"O*NET_Category": "Community & Social Service", "Average_AEI": 0.6808371954681073}, {"O*NET_Category": "Management", "Average_AEI": 0.6669469427342682}, {"O*NET_Category": "Sales & Related", "Average_AEI": 0.6446970487181277}, {"O*NET_Category": "Life, Physical & Social Science", "Average_AEI": 0.6345894678577111}, {"O*NET_Category": "Education, Training & Library", "Average_AEI": 0.6334240897857568}, {"O*NET_Category": "Computer & Mathematical", "Average_AEI": 0.6299414091932988}, {"O*NET_Category": "Architecture & Engineering", "Average_AEI": 0.6182854564760217}, {"O*NET_Category": "Business & Financial", "Average_AEI": 0.6051932319781079}, {"O*NET_Category": "Arts, Design, Entertainment, Sports & Media", "Average_AEI": 0.6011111377850136}, {"O*NET_Category": "Farming, Fishing & Forestry", "Average_AEI": 0.5966994945450176}, {"O*NET_Category": "Building & Grounds Cleaning & Maintenance", "Average_AEI": 0.5912669652141532}, {"O*NET_Category": "Office & Administrative Support", "Average_AEI": 0.5907897104751256}, {"O*NET_Category": "Legal", "Average_AEI": 0.585834256253628}, {"O*NET_Category": "Healthcare Practitioners & Technical", "Average_AEI": 0.5804485526829944}, {"O*NET_Category": "Transportation & Material Moving", "Average_AEI": 0.5595861457115092}, {"O*NET_Category": "Personal Care & Service", "Average_AEI": 0.5526976573590925}, {"O*NET_Category": "Protective Service", "Average_AEI": 0.5489108704036247}, {"O*NET_Category": "Healthcare Support", "Average_AEI": 0.5308788741950062}, {"O*NET_Category": "Production", "Average_AEI": 0.5131921089152653}, {"O*NET_Category": "Installation, Maintenance & Repair", "Average_AEI": 0.5022000591341937}, {"O*NET_Category": "Food Preparation & Serving", "Average_AEI": 0.5014269233928372}, {"O*NET_Category": "Construction & Extraction", "Average_AEI": 0.4998903892003319}];
+
+const categories = data.map(d => d["O*NET_Category"]);
+const values = data.map(d => d["Average_AEI"]);
+const labels = values.map(v => v.toFixed(3));
+
+const trace = {
+  type: "bar",
+  y: categories,
+  x: values,
+  orientation: "h",
+  marker: { color: "#0b3d91" },
+  text: labels,
+  textposition: "outside",
+  cliponaxis: false
+};
+
+const layout = {
+  title: {
+    text: "Average AI Exposure Index (AEI) by O*NET Category",
+    x: 0.01,
+    xanchor: "left",
+    font: {
+      family: "Times New Roman",
+      size: 32,
+      color: "#0b1f4d"
+    }
+  },
+  height: Math.max(720, categories.length * 35 + 260),
+  margin: { l: 420, r: 140, t: 90, b: 60 },
+  paper_bgcolor: "#f5f8ff",
+  plot_bgcolor: "#f5f8ff",
+  font: {
+    family: "Times New Roman",
+    size: 18,
+    color: "#0b1f4d"
+  },
+  xaxis: {
+    title: "Average AEI",
+    range: [0, 1.0],
+    gridcolor: "rgba(11,31,77,0.15)"
+  }
+};
+
+Plotly.newPlot("chart", [trace], layout, {
+  responsive: true,
+  displayModeBar: true
+});
+</script>
+</body>
+</html>
